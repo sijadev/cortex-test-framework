@@ -1,0 +1,233 @@
+# Cortex Test Framework - Git Ignore
+# ====================================
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*~
+
+# Temporary Files
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+*.orig
+*.rej
+.#*
+#*#
+
+# Log Files
+*.log
+logs/
+*.log.*
+
+# Database Files
+*.db
+*.sqlite
+*.sqlite3
+ai_link_advisor.db
+link-health-metrics.db
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.env
+.venv
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.metadata
+*.sublime-*
+
+# Test Results (keep structure, ignore content)
+test-results/*.json
+test-results/*.md
+test-results/*.xml
+test-results/*.html
+test-results/*.log
+test-results/python_*
+test-results/broken_links_*
+test-results/pipeline_*
+
+# But keep the directory and example files
+!test-results/
+!test-results/.gitkeep
+!test-results/README.md
+
+# AI Generated Reports (timestamped files)
+ai-suggestions-*.md
+ai-suggestions-test.md
+metrics-export*.json
+monitoring-report*.md
+
+# Dashboard Generated Files (timestamped)
+dashboard/*.html
+!dashboard/README.md
+!dashboard/.gitkeep
+
+# Template System Generated Files
+template-versions/*/
+template-backups/
+template-registry.json
+
+# But keep structure
+!template-versions/
+!template-versions/.gitkeep
+!template-backups/
+!template-backups/.gitkeep
+
+# Coverage Reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Node.js (if any JavaScript tools are added)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local Development
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+config.local.*
+settings.local.*
+
+# Archive Files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Compiled binaries
+*.exe
+*.out
+*.app
+
+# Framework specific temp files
+/tmp/
+.tmp/
+cortex-test-temp/
+cortex-temp/
+
+# Backup files from editors/tools
+*~
+*.orig
+*.bak
+.#*
+
+# macOS
+.AppleDouble
+.LSOverride
+Icon
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Sensitive Information
+*.key
+*.pem
+*.p12
+*.p8
+.env
+.env.*
+!.env.example
+secrets.json
+credentials.json
+
+# User-specific files
+.user
+.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# Comments for maintainers
+# =======================
+# This .gitignore is designed to:
+# 1. Keep core framework files committed
+# 2. Ignore generated/temporary content
+# 3. Maintain directory structure with .gitkeep files
+# 4. Protect sensitive information
+# 5. Allow for local development variations
+
+# To add exceptions, use: !filename
+# To ignore specific files in a committed directory, be specific

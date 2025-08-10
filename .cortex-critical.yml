@@ -1,0 +1,171 @@
+# Cortex Critical Files Configuration
+# Files matching these patterns are considered critical and must pass
+# strict link validation before commits are allowed
+
+# YAML Configuration for Critical Path Protection
+# Patterns support glob-style matching and regex
+
+critical_files:
+  # Core System Architecture
+  - "**/System-Workflows*"
+  - "**/Confidence Calculator*"
+  - "**/Auth-System*"
+  - "**/Quality-Gates*" 
+  - "**/Cross-Vault Linking*"
+  - "**/Pattern-Analysis*"
+  
+  # Central Hub and Navigation
+  - "**/Cortex-Hub*"
+  - "**/Decision-Index*"
+  - "**/Template-Index*"
+  
+  # Critical ADRs (Architectural Decision Records)
+  - "**/ADR-001-JWT-vs-Sessions*"
+  - "**/ADR-002-Password-Hashing*"
+  - "**/ADR-003-Projekt-Kapselung*"
+  - "**/ADR-004-API-Design-Approach*"
+  
+  # Core Templates (structure must be maintained)
+  - "**/ADR-Enhanced*"
+  - "**/Project-Workspace.md"
+  
+  # System Integration Points
+  - "**/README.md"
+  - "**/api-standards*"
+  - "**/rest-patterns*"
+
+# Health Score Thresholds
+health_thresholds:
+  critical_files: 95  # Critical files must have >95% link health
+  overall_system: 80  # Overall system should maintain >80% health
+  warning_level: 85   # Warn if health drops below 85%
+
+# Exclusions - Files that are critical but should have relaxed validation
+critical_exclusions:
+  # Templates are allowed to have placeholders
+  - "**/00-Templates/**"
+  - "**/*-template*"
+  - "**/*Template*"
+  
+  # Auto-generated files
+  - "**/Gap-Fill-examples*"
+  - "**/Auto-*"
+
+# Validation Rules for Critical Files
+validation_rules:
+  # Link validation
+  broken_links_allowed: 0          # Zero broken links in critical files
+  template_placeholders_ok: false  # No template placeholders in critical files
+  external_links_required: true    # External links must be accessible
+  
+  # Content validation  
+  min_content_length: 500           # Minimum content length (chars)
+  required_sections:                # Required sections in critical docs
+    - "## Overview"
+    - "## Related"
+  
+  # Metadata validation
+  require_confidence_score: true    # ADRs must have confidence assessment
+  require_timestamps: true          # Documents must have dates
+  require_cross_links: true         # Must link to related documents
+
+# Enforcement Levels
+enforcement:
+  pre_commit_hook: "strict"     # strict, warning, disabled
+  ci_cd_pipeline: "strict"      # Enforce in CI/CD
+  manual_review: "required"     # Require manual review for critical changes
+  
+# Notification Settings
+notifications:
+  critical_file_changes:
+    email: ["architecture-team@company.com"]
+    slack: "#cortex-critical"
+    webhook: "https://monitoring.company.com/cortex/critical-changes"
+  
+  health_degradation:
+    threshold: 85
+    channels: ["email", "slack"]
+    escalation_delay: "1h"
+
+# Auto-healing Configuration  
+auto_healing:
+  enabled: true
+  safe_patterns_only: true      # Only heal well-known safe patterns
+  require_approval: true        # Require human approval for auto-fixes
+  
+  # Patterns that can be auto-healed
+  safe_fixes:
+    - "case_sensitive_links"    # Fix case-sensitive link issues
+    - "relative_path_fixes"     # Fix relative path issues
+    - "markdown_syntax"         # Fix basic markdown syntax
+  
+  # Patterns that require manual intervention  
+  manual_fixes:
+    - "missing_files"           # Don't auto-create missing files
+    - "structural_changes"      # Don't auto-modify document structure
+    - "external_dependencies"   # Don't auto-fix external links
+
+# Monitoring and Reporting
+monitoring:
+  health_check_frequency: "daily"
+  detailed_report_frequency: "weekly"
+  critical_alert_threshold: 3      # Alert after 3 critical violations
+  
+  metrics:
+    - "link_health_score"
+    - "critical_file_compliance"  
+    - "validation_rule_violations"
+    - "auto_heal_success_rate"
+
+# Integration Settings
+integrations:
+  obsidian:
+    validate_on_save: true
+    show_critical_indicators: true
+    
+  vscode:
+    validate_on_save: true
+    critical_file_highlighting: true
+    
+  ci_cd:
+    block_on_critical_failures: true
+    allow_warnings: false
+    timeout_seconds: 300
+
+# Version and Maintenance
+version: "1.0"
+last_updated: "2025-08-10"
+maintained_by: "Cortex Architecture Team"
+
+# Comments and Documentation
+description: |
+  This configuration defines which files are considered critical for the
+  Cortex system and must maintain strict link health standards. Critical
+  files are core architectural components that other parts of the system
+  depend on.
+  
+  Critical files must pass enhanced validation including:
+  - Zero broken links allowed
+  - Required content sections present
+  - Proper cross-linking to related components
+  - Confidence assessments for decision documents
+  
+  Any changes to critical files trigger additional review processes and
+  may require architecture team approval depending on the nature of changes.
+
+examples: |
+  # Example usage in validation scripts:
+  
+  if is_critical_file "System-Workflows.md"; then
+    enforce_strict_validation
+    require_architecture_review  
+    send_critical_change_notifications
+  fi
+  
+  # Example integration with pre-commit hook:
+  
+  ./test-manager-enhanced.sh link-health --critical-only
+  if [ $? -ne 0 ]; then
+    echo "Critical file validation failed - blocking commit"
+    exit 1
+  fi
